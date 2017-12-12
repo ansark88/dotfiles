@@ -4,20 +4,21 @@ set number
 set hlsearch
 set wrapscan
 "set autoindent
+set expandtab
+"set tabstop=4
+set softtabstop=4
 set cindent	   "C言語特価のインデントスタイル helpでcinoptions-valuesを読もう
 set incsearch
 set backspace=eol,indent,start
-set tabstop=4
 set textwidth=0		"0は無効です
-"set softtabstop=4
 set shiftwidth=4
 set listchars=tab:>-
 " バッファを保存しなくても他のバッファを表示できるようにする
 set hidden
  " バッファが変更されているとき、コマンドをエラーにするのでなく、保存するかどうか確認を求める
 set confirm
-"set visualbell t_vb=
-"set noerrorbells
+set visualbell t_vb=
+set noerrorbells
 set iminsert=0	"InsertModeでIMEをOFF(0)にする
 
 set clipboard=unnamed,autoselect
@@ -30,6 +31,12 @@ let &directory = &backupdir
 "Undoファイルの置き場
 set undodir=$HOME/.vim/undo
         
+"vimdiff色
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+
 "**************** NeoBundle Setting ***************
 " Note: Skip initialization for vim-tiny or vim-small.
  if 0 | endif
@@ -60,7 +67,15 @@ NeoBundle 'unite.vim'
 NeoBundle 'ag.vim'
 NeoBundle 'taglist.vim'
 NeoBundle 'https://github.com/Shougo/vimshell.git'
-NeoBundle 'https://github.com/Shougo/vimproc'
+NeoBundle 'Shougo/vimproc.vim', {
+			\ 'build' : {
+			\     'windows' : 'tools\\update-dll-mingw',
+			\     'cygwin' : 'make -f make_cygwin.mak',
+			\     'mac' : 'make',
+			\     'linux' : 'make',
+			\     'unix' : 'gmake',
+			\    },
+			\ }
 NeoBundle 'YankRing.vim'
 NeoBundle 'othree/eregex.vim'
 NeoBundle 'sjl/gundo.vim'
@@ -307,6 +322,9 @@ vnoremap ,sw :s/\([ \t]*\)\(.*[^ \t]\)\([ \t]*=[ \t]*\)\([^ \t]*[^;]\)\(;\)/\1\4
 nnoremap <F1> jk
 inoremap <F1> <Space><BS>  
 vnoremap <F1> jk
+
+"http://qiita.com/hachi8833/items/7beeee825c11f7437f54
+inoremap <silent> jj <ESC>
 
 "http://qiita.com/rita_cano_bika/items/2ae9c8304f8f12b1b443より
 "xで消した時にヤンクレジスタに保存しない
