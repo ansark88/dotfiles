@@ -20,6 +20,7 @@ set confirm
 set visualbell t_vb=
 set noerrorbells
 set iminsert=0	"InsertModeでIMEをOFF(0)にする
+set iskeyword+=- " ハイフンは単語の一部として扱う
 
 set clipboard=unnamed,autoselect
 
