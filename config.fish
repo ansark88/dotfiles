@@ -17,3 +17,5 @@ fish_add_path -gP "/opt/homebrew/bin" "/opt/homebrew/sbin";
 
 set -g theme_display_git_default_branch yes
 set -g theme_date_format "+%F %H:%M"
+
+starship init fish | source
